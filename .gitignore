@@ -6,3 +6,6 @@
 /Kulman.WinRT.Nuget/content
 /Kulman.WinRT.Nuget/lib
 /Kulman.WinRT.Nuget/obj
+
+/Kulman.WinRT.Nuget/*.bak
+/Kulman.WinRT.Nuget/*.nupkg

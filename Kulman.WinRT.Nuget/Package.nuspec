@@ -25,8 +25,8 @@
     <tags></tags>
   </metadata>
   <files>
-    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.dll" target="lib\winrt\Kulman.WinRT.dll" />
-    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.pdb" target="lib\winrt\Kulman.WinRT.pdb" />
-    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.pri" target="lib\winrt\Kulman.WinRT.pri" />
+    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.dll" target="lib\WinRT45\Kulman.WinRT.dll" />
+    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.pdb" target="lib\WinRT45\Kulman.WinRT.pdb" />
+    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.pri" target="lib\WinRT45\Kulman.WinRT.pri" />
   </files>
 </package>

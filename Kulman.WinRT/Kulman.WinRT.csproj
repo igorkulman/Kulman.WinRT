@@ -134,8 +134,6 @@
     <Compile Include="UI\SemanticGrid.cs" />
     <Compile Include="UI\SettingsFlyout.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="Multimedia\YouTube.cs" />
-    <Compile Include="Multimedia\YouTubeQuality.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
