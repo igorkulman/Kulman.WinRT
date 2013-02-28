@@ -15,7 +15,7 @@
       Collection of useful utilities and components for WinRT applications
     </summary>
     <language>en-US</language>
-    <projectUrl>https://nuget.org/packages/Kulman.WinRT</projectUrl>
+    <projectUrl>http://code.kulman.sk/kulman.winrt</projectUrl>
     
     <copyright>Copyright  2013 Igor Kulman</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
