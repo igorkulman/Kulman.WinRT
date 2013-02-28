@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Kulman.WinRT</id>
+    <version>1.0.0</version>
+    <title>Kulman.WinRT</title>
+    <authors>Igor Kulman</authors>
+    <owners>Igor Kulman</owners>
+    <description>
+      Collection of useful utilities and components for WinRT applications
+    </description>
+    <releaseNotes>
+    </releaseNotes>
+    <summary>
+      Collection of useful utilities and components for WinRT applications
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://nuget.org/packages/Kulman.WinRT</projectUrl>
+    
+    <copyright>Copyright  2013 Igor Kulman</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>        
+    </dependencies>
+    <references></references>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.dll" target="lib\winrt\Kulman.WinRT.dll" />
+    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.pdb" target="lib\winrt\Kulman.WinRT.pdb" />
+    <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.pri" target="lib\winrt\Kulman.WinRT.pri" />
+  </files>
+</package>

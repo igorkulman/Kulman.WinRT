@@ -1,3 +1,8 @@
 /Kulman.WinRT/obj
 /Kulman.WinRT/bin
 /*.suo
+
+/Kulman.WinRT.Nuget/bin
+/Kulman.WinRT.Nuget/content
+/Kulman.WinRT.Nuget/lib
+/Kulman.WinRT.Nuget/obj
