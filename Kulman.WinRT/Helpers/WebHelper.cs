@@ -1,0 +1,106 @@
+﻿using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.Networking.Connectivity;
+using Windows.Storage;
+
+namespace Kulman.WinRT.Helpers
+{
+    public static class WebHelper
+    {
+        public static bool IsConnectedToInternet()
+        {
+            
+
+            //return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
+            ConnectionProfile connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            return (connectionProfile!=null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
+
+        }
+
+        
+        public static async Task<string> SendPostToUriAsync(string targetUri, string content)
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.UseDefaultCredentials = true;
+            handler.AllowAutoRedirect = false;
+            
+            HttpClient client = new HttpClient(handler);
+
+            HttpContent httpContent = new StringContent(content);
+            //Debug.WriteLine(content);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+
+
+            HttpResponseMessage response = await client.PostAsync(targetUri, httpContent);
+
+
+            return await response.Content.ReadAsStringAsync();
+        }
+       
+
+        public static async Task<string> DownloadPageAsync(string url)
+        {
+            HttpClientHandler handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = true};
+            HttpClient client = new HttpClient(handler);            
+            client.MaxResponseContentBufferSize = 196608;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            response.EnsureSuccessStatusCode();
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return responseBody;
+        }
+
+        public static async Task<string> DownloadPageAsync(string url, string encoding)
+        {
+            HttpClientHandler handler = new HttpClientHandler { UseDefaultCredentials = true, AllowAutoRedirect = true };
+            HttpClient client = new HttpClient(handler);
+            client.MaxResponseContentBufferSize = 196608;
+            HttpResponseMessage response = await client.GetAsync(url);
+
+            response.EnsureSuccessStatusCode();
+
+            var arr = await response.Content.ReadAsByteArrayAsync();
+
+            var myEncoding = new CustomEncoding();
+
+            return myEncoding.GetString(arr, 0, arr.Length);
+        }
+
+        /// <summary>
+        /// Remove HTML tags from string using char array.
+        /// </summary>
+        public static string StripTags(this string source)
+        {
+            char[] array = new char[source.Length];
+            int arrayIndex = 0;
+            bool inside = false;
+
+            for (int i = 0; i < source.Length; i++)
+            {
+                char let = source[i];
+                if (let == '<')
+                {
+                    inside = true;
+                    continue;
+                }
+                if (let == '>')
+                {
+                    inside = false;
+                    continue;
+                }
+                if (!inside)
+                {
+                    array[arrayIndex] = let;
+                    arrayIndex++;
+                }
+            }
+            return new string(array, 0, arrayIndex);
+        }
+
+       
+    }
+}
