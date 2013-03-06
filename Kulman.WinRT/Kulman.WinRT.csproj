@@ -109,6 +109,7 @@
     <Compile Include="Classes\SortedObservableCollection.cs" />
     <Compile Include="Config\AppConfig.cs" />
     <Compile Include="Converters\DateFormatConverter.cs" />
+    <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Extensions\FileExtensions.cs" />
