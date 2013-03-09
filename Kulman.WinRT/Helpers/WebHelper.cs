@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking.Connectivity;
-using Windows.Storage;
 
 namespace Kulman.WinRT.Helpers
 {
@@ -12,22 +9,18 @@ namespace Kulman.WinRT.Helpers
     {
         public static bool IsConnectedToInternet()
         {
-            
-
             //return System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
             ConnectionProfile connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-            return (connectionProfile!=null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
-
+            return (connectionProfile != null &&
+                    connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
         }
 
-        
+
         public static async Task<string> SendPostToUriAsync(string targetUri, string content)
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.UseDefaultCredentials = true;
-            handler.AllowAutoRedirect = false;
-            
-            HttpClient client = new HttpClient(handler);
+            var handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = false};
+
+            var client = new HttpClient(handler);
 
             HttpContent httpContent = new StringContent(content);
             //Debug.WriteLine(content);
@@ -39,13 +32,12 @@ namespace Kulman.WinRT.Helpers
 
             return await response.Content.ReadAsStringAsync();
         }
-       
+
 
         public static async Task<string> DownloadPageAsync(string url)
         {
-            HttpClientHandler handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = true};
-            HttpClient client = new HttpClient(handler);            
-            client.MaxResponseContentBufferSize = 196608;
+            var handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = true};
+            var client = new HttpClient(handler) {MaxResponseContentBufferSize = 196608};
             HttpResponseMessage response = await client.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
@@ -56,9 +48,8 @@ namespace Kulman.WinRT.Helpers
 
         public static async Task<string> DownloadPageAsync(string url, string encoding)
         {
-            HttpClientHandler handler = new HttpClientHandler { UseDefaultCredentials = true, AllowAutoRedirect = true };
-            HttpClient client = new HttpClient(handler);
-            client.MaxResponseContentBufferSize = 196608;
+            var handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = true};
+            var client = new HttpClient(handler) {MaxResponseContentBufferSize = 196608};
             HttpResponseMessage response = await client.GetAsync(url);
 
             response.EnsureSuccessStatusCode();
@@ -75,7 +66,7 @@ namespace Kulman.WinRT.Helpers
         /// </summary>
         public static string StripTags(this string source)
         {
-            char[] array = new char[source.Length];
+            var array = new char[source.Length];
             int arrayIndex = 0;
             bool inside = false;
 
@@ -100,7 +91,5 @@ namespace Kulman.WinRT.Helpers
             }
             return new string(array, 0, arrayIndex);
         }
-
-       
     }
 }

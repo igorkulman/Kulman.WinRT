@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.Storage;
@@ -13,7 +12,7 @@ namespace Kulman.WinRT.Config
     public static class AppConfig
     {
         #region Fields
-        private static XDocument Document;
+        private static XDocument _document;
         private static readonly Dictionary<string, string> Dictionary = new Dictionary<string, string>();
         #endregion
 
@@ -31,12 +30,12 @@ namespace Kulman.WinRT.Config
                         await reader.LoadAsync((uint)fs.Size);
                         string data = reader.ReadString((uint)fs.Size);
                         reader.DetachStream();
-                        Document = XDocument.Parse(data, LoadOptions.None);
+                        _document = XDocument.Parse(data, LoadOptions.None);
                     }
                 }
             }
 
-            if (!Document.Elements().Any())
+            if (!_document.Elements().Any())
             {
                 //MessageBox.Show("No config file");
                 return false;
@@ -46,7 +45,7 @@ namespace Kulman.WinRT.Config
             {
 
 
-                var root = Document.Root;
+                var root = _document.Root;
                 if (root == null)
                 {
                     //MessageBox.Show("No root element");

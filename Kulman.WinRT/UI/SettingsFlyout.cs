@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 
@@ -12,7 +7,7 @@ namespace Kulman.WinRT.UI
     public class SettingsFlyout
     {
 
-        private const int _width = 346;
+        private const int Width = 346;
         private Popup _popup;
 
         public void ShowFlyout(UserControl control)
@@ -21,14 +16,14 @@ namespace Kulman.WinRT.UI
             _popup.Closed += OnPopupClosed;
             Window.Current.Activated += OnWindowActivated;
             _popup.IsLightDismissEnabled = true;
-            _popup.Width = _width;
+            _popup.Width = Width;
             _popup.Height = Window.Current.Bounds.Height;
 
-            control.Width = _width;
+            control.Width = Width;
             control.Height = Window.Current.Bounds.Height;
 
             _popup.Child = control;
-            _popup.SetValue(Canvas.LeftProperty, Window.Current.Bounds.Width - _width);
+            _popup.SetValue(Canvas.LeftProperty, Window.Current.Bounds.Width - Width);
             _popup.SetValue(Canvas.TopProperty, 0);
             _popup.IsOpen = true;
         }

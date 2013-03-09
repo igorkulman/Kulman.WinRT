@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Kulman.WinRT.Helpers
 {
     public static class StringHelper
     {
-        private static readonly Random _rng = new Random();
-        private static string _chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwzxy123456789";
+        private static readonly Random Rng = new Random();
+        private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwzxy123456789";
 
         public static string RandomString(int size)
         {
-            char[] buffer = new char[size];
+            var buffer = new char[size];
 
             for (int i = 0; i < size; i++)
             {
-                buffer[i] = _chars[_rng.Next(_chars.Length)];
+                buffer[i] = Chars[Rng.Next(Chars.Length)];
             }
             return new string(buffer);
         }

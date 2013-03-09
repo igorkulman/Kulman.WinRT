@@ -6,27 +6,19 @@ namespace Kulman.WinRT.Extensions
     {
         public static DateTime ConvertFromUnixTimestamp(uint timestamp)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp);
         }
 
 
         public static double ConvertToUnixTimestamp(this DateTime date)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             TimeSpan diff = date - origin;
             return Math.Floor(diff.TotalSeconds);
         }
 
-        /// <summary>
-        /// Get the first date of the week for a certain date, provided
-        /// that the first day of the week is Monday, the first week of
-        /// a year is the one that includes the first Thursday of that
-        /// year and the last week of a year is the one that immediately
-        /// precedes the first calendar week of the next year.
-        /// </summary>
-        /// <param name="date">ISO 8601 date of interest.</param>
-        /// <returns>The first week date.</returns>
+
         public static DateTime GetFirstDateOfWeek(this DateTime date)
         {
             if (date == DateTime.MinValue)
@@ -38,15 +30,7 @@ namespace Kulman.WinRT.Extensions
             return date.AddDays(1);
         }
 
-        /// <summary>
-        /// Get the last date of the week for a certain date, provided
-        /// that the first day of the week is Monday, the first week of
-        /// a year is the one that includes the first Thursday of that
-        /// year and the last week of a year is the one that immediately
-        /// precedes the first calendar week of the next year.
-        /// </summary>
-        /// <param name="date">ISO 8601 date of interest.</param>
-        /// <returns>The first week date.</returns>
+
         public static DateTime GetLastDateOfWeek(this DateTime date)
         {
             if (date == DateTime.MaxValue)
@@ -59,30 +43,22 @@ namespace Kulman.WinRT.Extensions
         }
 
 
-        /// <summary>Get the week number of a certain date, provided that
-        /// the first day of the week is Monday, the first week of a year
-        /// is the one that includes the first Thursday of that year and
-        /// the last week of a year is the one that immediately precedes
-        /// the first calendar week of the next year.
-        /// </summary>
-        /// <param name="date">Date of interest.</param>
-        /// <returns>The week number.</returns>
         public static int GetWeekNumber(this DateTime date)
         {
             //Constants
-            const int JAN = 1;
-            const int DEC = 12;
-            const int LASTDAYOFDEC = 31;
-            const int FIRSTDAYOFJAN = 1;
-            const int THURSDAY = 4;
+            const int jan = 1;
+            const int dec = 12;
+            const int lastdayofdec = 31;
+            const int firstdayofjan = 1;
+            const int thursday = 4;
             bool thursdayFlag = false;
 
             //Get the day number since the beginning of the year
             int dayOfYear = date.DayOfYear;
 
             //Get the first and last weekday of the year
-            int startWeekDayOfYear = (int)(new DateTime(date.Year, JAN, FIRSTDAYOFJAN)).DayOfWeek;
-            int endWeekDayOfYear = (int)(new DateTime(date.Year, DEC, LASTDAYOFDEC)).DayOfWeek;
+            var startWeekDayOfYear = (int) (new DateTime(date.Year, jan, firstdayofjan)).DayOfWeek;
+            var endWeekDayOfYear = (int) (new DateTime(date.Year, dec, lastdayofdec)).DayOfWeek;
 
             //Compensate for using monday as the first day of the week
             if (startWeekDayOfYear == 0)
@@ -94,18 +70,18 @@ namespace Kulman.WinRT.Extensions
             int daysInFirstWeek = 8 - (startWeekDayOfYear);
 
             //Year starting and ending on a thursday will have 53 weeks
-            if (startWeekDayOfYear == THURSDAY || endWeekDayOfYear == THURSDAY)
+            if (startWeekDayOfYear == thursday || endWeekDayOfYear == thursday)
                 thursdayFlag = true;
 
             //We begin by calculating the number of FULL weeks between
             //the year start and our date. The number is rounded up so
             //the smallest possible value is 0.
-            int fullWeeks = (int)Math.Ceiling((dayOfYear - (daysInFirstWeek)) / 7.0);
+            var fullWeeks = (int) Math.Ceiling((dayOfYear - (daysInFirstWeek))/7.0);
             int resultWeekNumber = fullWeeks;
 
             //If the first week of the year has at least four days, the
             //actual week number for our date can be incremented by one.
-            if (daysInFirstWeek >= THURSDAY)
+            if (daysInFirstWeek >= thursday)
                 resultWeekNumber = resultWeekNumber + 1;
 
             //If the week number is larger than 52 (and the year doesn't
@@ -119,7 +95,7 @@ namespace Kulman.WinRT.Extensions
             //We therefore execute this function recursively, using the
             //last day of the previous year.
             if (resultWeekNumber == 0)
-                resultWeekNumber = GetWeekNumber(new DateTime(date.Year - 1, DEC, LASTDAYOFDEC));
+                resultWeekNumber = GetWeekNumber(new DateTime(date.Year - 1, dec, lastdayofdec));
             return resultWeekNumber;
         }
     }

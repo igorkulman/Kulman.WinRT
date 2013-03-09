@@ -9,3 +9,5 @@
 
 /Kulman.WinRT.Nuget/*.bak
 /Kulman.WinRT.Nuget/*.nupkg
+
+/_ReSharper.Kulman.WinRT

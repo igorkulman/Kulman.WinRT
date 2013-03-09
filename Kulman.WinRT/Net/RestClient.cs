@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -16,7 +14,7 @@ namespace Kulman.WinRT.Net
             public object Value { get; set; }
         }
 
-        private string _targetUrl;
+        private readonly string _targetUrl;
 
         public List<Parameter> Parameters { get; private set; }
 
@@ -28,13 +26,11 @@ namespace Kulman.WinRT.Net
 
         public async Task<string> SendPostToUriAsync(string path)
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.UseDefaultCredentials = true;
-            handler.AllowAutoRedirect = false;
+            var handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = false};
 
-            HttpClient client = new HttpClient(handler);
+            var client = new HttpClient(handler);
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             for (int i=0; i<Parameters.Count;++i)
             {
                 if (Parameters[i] == null || Parameters[i].Name == null || Parameters[i].Value == null) continue;
@@ -58,13 +54,11 @@ namespace Kulman.WinRT.Net
 
         public async Task<System.Net.HttpStatusCode> SendPostToUriAsyncReturnHttpCode(string path)
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.UseDefaultCredentials = true;
-            handler.AllowAutoRedirect = false;
+            var handler = new HttpClientHandler {UseDefaultCredentials = true, AllowAutoRedirect = false};
 
-            HttpClient client = new HttpClient(handler);
+            var client = new HttpClient(handler);
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             for (int i = 0; i < Parameters.Count; ++i)
             {
                 if (Parameters[i] == null || Parameters[i].Name == null || Parameters[i].Value == null) continue;
