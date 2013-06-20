@@ -66,7 +66,8 @@ namespace Kulman.WinRT.Net
                 sb.Append(i == 0 ? "" : "&");
                 sb.Append(Parameters[i].Name);
                 sb.Append("=");
-                sb.Append(Parameters[i].Value);
+                var val = System.Net.WebUtility.UrlEncode(Parameters[i].Value.ToString());
+                sb.Append(val);
             }
 
             HttpContent httpContent = new StringContent(sb.ToString());
