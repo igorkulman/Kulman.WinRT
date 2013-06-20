@@ -11,3 +11,4 @@
 /Kulman.WinRT.Nuget/*.nupkg
 
 /_ReSharper.Kulman.WinRT
+/Kulman.WinRT.Nuget/NuGet.log
