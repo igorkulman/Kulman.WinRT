@@ -30,6 +30,7 @@ namespace Kulman.WinRT.Helpers
                 sb.Append(array[i].ToString());
             }
 
+            ApplicationData.Current.LocalSettings.Values["DeviceId"] = sb.ToString();
             return sb.ToString();
         }
     }
