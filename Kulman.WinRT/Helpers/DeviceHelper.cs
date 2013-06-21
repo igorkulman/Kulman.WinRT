@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Windows.Storage;
 
 namespace Kulman.WinRT.Helpers
 {
@@ -6,6 +7,12 @@ namespace Kulman.WinRT.Helpers
     {
         public static string GetDeviceId()
         {
+            var saved = ApplicationData.Current.LocalSettings.Values["DeviceId"];
+            if (saved != null)
+            {
+                return (string) saved;
+            }
+
             var packageSpecificToken = Windows.System.Profile.HardwareIdentification.GetPackageSpecificToken(null);
 
             // hardware id, signature, certificate IBuffer objects 
