@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Kulman.WinRT</id>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <title>Kulman.WinRT</title>
     <authors>Igor Kulman</authors>
     <owners>Igor Kulman</owners>
@@ -22,7 +22,7 @@
     <dependencies>        
     </dependencies>
     <references></references>
-    <tags></tags>
+    <tags>winrt</tags>
   </metadata>
   <files>
     <file src="..\Kulman.WinRT\bin\Release\Kulman.WinRT.dll" target="lib\WinRT45\Kulman.WinRT.dll" />

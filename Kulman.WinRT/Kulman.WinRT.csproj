@@ -128,6 +128,11 @@
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="Net\RestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILocalizationService.cs" />
+    <Compile Include="Services\IWindowsStoreService.cs" />
+    <Compile Include="Services\LocalizationService.cs" />
+    <Compile Include="Services\PurchaseResponse.cs" />
+    <Compile Include="Services\WindowsStoreService.cs" />
     <Compile Include="UI\BindableRuns.cs" />
     <Compile Include="UI\DialogHelper.cs" />
     <Compile Include="UI\DispatcherHelper.cs" />
