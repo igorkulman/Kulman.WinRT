@@ -18,7 +18,8 @@
     <projectUrl>https://github.com/igorkulman/Kulman.WinRT</projectUrl>
     
     <copyright>Copyright  2013 Igor Kulman</copyright>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://raw.github.com/igorkulman/Kulman.WinRT/master/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <dependencies>        
     </dependencies>
     <references></references>
