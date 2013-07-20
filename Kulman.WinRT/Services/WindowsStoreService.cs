@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Windows.ApplicationModel.Store;
+using Windows.Storage;
 
 namespace Kulman.WinRT.Services
 {
     public class WindowsStoreService:IWindowsStoreService
     {
         public bool IsPurchased(string productId)
-        {            
+        {
+            if (String.IsNullOrEmpty(productId)) return false;
+
             #if DEBUG
                         var licenseInformation = CurrentAppSimulator.LicenseInformation;
             #else
@@ -18,8 +23,78 @@ namespace Kulman.WinRT.Services
             return licenseInformation.ProductLicenses[productId].IsActive;
         }
 
+        public async Task<string> GetPrice(string productId)
+        {           
+            try
+            {
+#if DEBUG
+                var products = await CurrentAppSimulator.LoadListingInformationAsync();
+#else
+                var products = await CurrentApp.LoadListingInformationAsync();
+#endif
+                var product = products.ProductListings.SingleOrDefault(l => l.Value.ProductId == productId);
+                if (product.Value == null) return string.Empty;
+
+                return product.Value.FormattedPrice;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        public async Task<string> GetReceiptOrReceiptId(string productId)
+        {           
+
+#if DEBUG
+            var licenseInformation = CurrentAppSimulator.LicenseInformation;
+#else
+                        var licenseInformation = CurrentApp.LicenseInformation;    
+#endif
+
+            if (!licenseInformation.ProductLicenses[productId].IsActive)
+            {
+                return null;
+            }
+
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey(productId))
+            {
+                return ApplicationData.Current.LocalSettings.Values[productId].ToString();
+            }
+
+#if DEBUG
+            var appReceipt = await CurrentAppSimulator.GetAppReceiptAsync();
+#else
+            var appReceipt = await CurrentApp.GetAppReceiptAsync(); 
+#endif
+            try
+            {
+                var doc = XDocument.Parse(appReceipt);
+                var receiptInfo = doc.Descendants("ProductReceipt")
+                                     .SingleOrDefault(l => l.Attribute("ProductId").Value == productId);
+                if (receiptInfo != null)
+                {
+                    return receiptInfo.Attribute("Id").Value;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return null;
+        }
+
         public async Task<PurchaseResponse> BuyAndGetReceipt(string productId)
         {
+            if (String.IsNullOrEmpty(productId))
+            {
+                return new PurchaseResponse
+                    {
+                        Result = PurchaseResult.Error
+                    };
+            }
+
 #if DEBUG
             var licenseInformation = CurrentAppSimulator.LicenseInformation;
 #else
@@ -44,6 +119,8 @@ namespace Kulman.WinRT.Services
                 if (licenseInformation.ProductLicenses[productId].IsActive)
 #endif
                 {
+                    ApplicationData.Current.LocalSettings.Values[productId] = receipt;
+
                     return new PurchaseResponse
                     {
                         Result = PurchaseResult.Ok,

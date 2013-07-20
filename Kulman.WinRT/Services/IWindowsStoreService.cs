@@ -6,5 +6,7 @@ namespace Kulman.WinRT.Services
     {
         bool IsPurchased(string productId);
         Task<PurchaseResponse> BuyAndGetReceipt(string productId);
+        Task<string> GetPrice(string productId);
+        Task<string> GetReceiptOrReceiptId(string productId);
     }
 }

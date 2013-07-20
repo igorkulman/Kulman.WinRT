@@ -132,6 +132,7 @@
     <Compile Include="Services\IWindowsStoreService.cs" />
     <Compile Include="Services\LocalizationService.cs" />
     <Compile Include="Services\PurchaseResponse.cs" />
+    <Compile Include="Services\ServiceResult.cs" />
     <Compile Include="Services\WindowsStoreService.cs" />
     <Compile Include="UI\BindableRuns.cs" />
     <Compile Include="UI\DialogHelper.cs" />
