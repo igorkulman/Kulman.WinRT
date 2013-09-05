@@ -4,12 +4,18 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Kulman.WinRT.UI
 {
+    /// <summary>
+    /// Simple settings flayout using a UserControl
+    /// </summary>
     public class SettingsFlyout
     {
-
         private const int Width = 346;
         private Popup _popup;
 
+        /// <summary>
+        /// Displays given UserControl as settings flyout
+        /// </summary>
+        /// <param name="control">UserControl</param>
         public void ShowFlyout(UserControl control)
         {
             _popup = new Popup();

@@ -2,6 +2,9 @@
 
 namespace Kulman.WinRT.ViewModel
 {
+    /// <summary>
+    /// ViewModel base class implementing INotifyPropertyChanged
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

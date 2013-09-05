@@ -2,6 +2,9 @@
 
 namespace Kulman.WinRT.UI
 {
+    /// <summary>
+    /// Grid control that can be used as a child of SemanticZoom
+    /// </summary>
     public class SemanticGrid: Grid,ISemanticZoomInformation
     {
         public void CompleteViewChange()
