@@ -1,5 +1,9 @@
 ﻿namespace Kulman.WinRT.Services
 {
+    /// <summary>
+    /// Universal result type containing status code, error message and the actual result
+    /// </summary>
+    /// <typeparam name="T">Result type</typeparam>
     public class ServiceResult<T>
     {
         public int Status

@@ -2,6 +2,9 @@
 
 namespace Kulman.WinRT.Services
 {
+    /// <summary>
+    /// Interface for Windows Store service
+    /// </summary>
     public interface IWindowsStoreService
     {
         bool IsPurchased(string productId);
