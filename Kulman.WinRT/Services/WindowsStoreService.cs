@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
+using Kulman.WinRT.Data;
+using Kulman.WinRT.Interfaces;
 
 namespace Kulman.WinRT.Services
 {

@@ -1,4 +1,5 @@
 ﻿using Windows.ApplicationModel.Resources;
+using Kulman.WinRT.Interfaces;
 
 namespace Kulman.WinRT.Services
 {
